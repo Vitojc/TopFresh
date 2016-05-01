@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="app.default" template="/WEB-INF/jsp/layout/default-template.jsp">
+        <put-attribute name="title" value="标题"/>
+        <put-attribute name="current-menu" value="Home"/>
+        <put-attribute name="head" value="/WEB-INF/jsp/layout/head-default.jsp"/>
+        <put-attribute name="header" value="/WEB-INF/jsp/layout/header-nav.jsp"/>
+        <put-attribute name="search" value="/WEB-INF/jsp/layout/header-logo-search.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/layout/content-default.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/layout/footer-default.jsp"/>
+    </definition>
+
+    <definition name="app.index" extends="app.default">
+        <put-attribute name="title" value="首页"/>
+        <put-attribute name="current-menu" value="Home"/>
+    </definition>
+</tiles-definitions>

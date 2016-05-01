@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="TopFresh:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/TopFresh_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="TopFresh/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="TopFresh" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
