@@ -12,24 +12,29 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-2.1.4.min.js"></script>
-    <link href="${pageContext.request.contextPath}/static/css/style.css" type="text/css" rel="stylesheet" id="styles"/>
     <sb:head/>
+    <link href="${pageContext.request.contextPath}/static/css/style.css" type="text/css" rel="stylesheet" id="styles"/>
     <title><tiles:getAsString name="title" ignore="true"/></title>
     <tiles:insertAttribute name="head"/>
 </head>
 <body>
-<div class="wrap">
-    <tiles:useAttribute name="current-menu" id="menu"/>
+<div class="wrap" id="wrap">
+    <tiles:useAttribute name="current-menu" id="menu" ignore="true"/>
     <tiles:insertAttribute name="header">
         <tiles:putAttribute name="current-menu" value="${menu}"/>
     </tiles:insertAttribute>
-    <tiles:insertAttribute name="search"/>
-    <tiles:insertAttribute name="content"/>
+    <div class="container">
+        <tiles:insertAttribute name="search"/>
+        <tiles:insertAttribute name="content"/>
+    </div>
     <div class="clear" id="end"></div>
 </div><!--.wrap-->
 <footer id="copyright">
     <tiles:insertAttribute name="footer"/>
 </footer>
+<tiles:insertAttribute name="sidebar"/>
 </body>
 </html>

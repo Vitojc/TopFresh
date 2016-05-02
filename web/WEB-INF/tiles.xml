@@ -8,9 +8,12 @@
         <put-attribute name="current-menu" value="Home"/>
         <put-attribute name="head" value="/WEB-INF/jsp/layout/head-default.jsp"/>
         <put-attribute name="header" value="/WEB-INF/jsp/layout/header-nav.jsp"/>
+
         <put-attribute name="search" value="/WEB-INF/jsp/layout/header-logo-search.jsp"/>
         <put-attribute name="content" value="/WEB-INF/jsp/layout/content-default.jsp"/>
+
         <put-attribute name="footer" value="/WEB-INF/jsp/layout/footer-default.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/jsp/layout/right-side.jsp"/>
     </definition>
 
     <definition name="app.index" extends="app.default">
