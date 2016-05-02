@@ -7,3 +7,4 @@ TopFresh/领鲜/Java Web/Java EE/Struts2 + Hibrnate + Tiles + jQuery + Bootstrap
 - 2016-04-29 尝试用Struts2
 - 2016-04-30 尝试整合Tiles Hibernate
 - 2016-05-01 使用IDEA开工
+- 2016-05-02 新增页面框架模板，数据库建表(Hibernate)

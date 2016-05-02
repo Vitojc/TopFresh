@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuaration DTD 3.0//EN"
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
@@ -21,5 +21,13 @@
         <property name="hibernate.format_sql">true</property>
 
         <mapping class="com.youthlin.TopFresh.test.DBTest"/>
+
+        <mapping class="com.youthlin.TopFresh.po.Admin"/>
+        <mapping class="com.youthlin.TopFresh.po.ImageUpload"/>
+        <mapping class="com.youthlin.TopFresh.po.OrderInfo"/>
+        <mapping class="com.youthlin.TopFresh.po.OrderItem"/>
+        <mapping class="com.youthlin.TopFresh.po.Product"/>
+        <mapping class="com.youthlin.TopFresh.po.ProductType"/>
+        <mapping class="com.youthlin.TopFresh.po.User"/>
     </session-factory>
 </hibernate-configuration>
