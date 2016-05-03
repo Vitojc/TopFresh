@@ -12,10 +12,15 @@
             /WEB-INF/tiles.xml
         </param-value>
     </context-param>
+
     <listener>
         <listener-class>
             org.apache.struts2.tiles.StrutsTilesListener
         </listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
     <filter>

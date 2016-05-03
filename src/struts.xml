@@ -8,7 +8,6 @@
     <constant name="struts.devMode" value="true"/>
     <!--静态路径的资源http://www.cnblogs.com/nova-/p/3763883.html-->
     <constant name="struts.action.excludePattern" value="/static/.*?"/>
-    <constant name="struts.ui.theme" value="bootstrap"/>
 
     <package name="default" namespace="/" extends="struts-default">
         <result-types>
@@ -20,6 +19,12 @@
         </action>
         <action name="index">
             <result name="success" type="tiles">app.index</result>
+        </action>
+
+        <action name="user" class="com.youthlin.TopFresh.action.UserAction" method="add">
+            <!--TODO 测试添加用户-->
+            <result name="success" type="tiles">app.default</result>
+            <result name="error" type="tiles">app.index</result>
         </action>
     </package>
 </struts>
