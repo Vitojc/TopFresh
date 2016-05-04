@@ -36,7 +36,7 @@
         }
     </style>
     <div class="col-lg-4 col-md-6 col-sm-8 col-xs-10 mycenter" id="login">
-        <s:form action="login" theme="simple">
+        <s:form action="login" theme="simple" id="admin-login-form">
             <h2>登录</h2>
             <div class="input-group">
                 <label for="username" class="input-group-addon">账号</label>
@@ -45,13 +45,22 @@
             </div>
             <div class="input-group">
                 <label for="password" class="input-group-addon">密码</label>
-                    <%--<s:hidden name="admin.adminPassword" id="password"/>--%>
-                <s:password name="admin.adminPassword" class="form-control"
-                            placeholder="管理员密码" required="true" id="password"/>
+                <s:hidden name="admin.adminPassword" id="password"/>
+                <input type="password" class="form-control"
+                       placeholder="管理员密码" required id="password-plain"/>
             </div>
-            <div class="text-danger" id="tip">&nbsp;</div>
+            <div class="text-danger" id="tip">${pageContext.session.getAttribute("login-tip")}&nbsp;</div>
             <s:submit cssClass="btn btn-lg btn-primary btn-block" value="登录" id="admin-login-form-submit"/>
         </s:form>
+        <script>
+            jQuery(document).ready(function ($) {
+                $('#admin-login-form').submit(function () {
+                    var v = $.md5("TopFresh$" + $('#username').val() + "$" + $('#password-plain').val() + "$霖");
+                    $('#password').val(v);
+                    return true;
+                });
+            });
+        </script>
         <!--[if lt IE 9]>
         <script>
             var login_u = document.getElementById('username');

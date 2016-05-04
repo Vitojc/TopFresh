@@ -17,6 +17,7 @@ public class LoginAction extends ActionSupport {
     @Override
     public String execute() {
         System.out.println("执行登录");
+        ActionContext.getContext().getSession().remove("login-tip");
         if (getAdmin() != null && getAdminService().login(getAdmin())) {
             ActionContext.getContext().getSession().put("admin", getAdmin());
             System.out.println("登录成功");

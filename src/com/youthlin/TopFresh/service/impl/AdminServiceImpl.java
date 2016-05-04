@@ -1,5 +1,6 @@
 package com.youthlin.TopFresh.service.impl;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.youthlin.TopFresh.dao.AdminDao;
 import com.youthlin.TopFresh.po.Admin;
 import com.youthlin.TopFresh.service.AdminService;
@@ -32,6 +33,7 @@ public class AdminServiceImpl implements AdminService {
                     && a.getAdminPassword().equals(admin.getAdminPassword()))
                 return true;
         }
+        ActionContext.getContext().getSession().put("login-tip", "用户名或密码错误");
         return false;
     }
 }
