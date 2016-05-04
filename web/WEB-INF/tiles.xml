@@ -20,4 +20,30 @@
         <put-attribute name="title" value="首页"/>
         <put-attribute name="current-menu" value="Home"/>
     </definition>
+
+    <definition name="app.404" extends="app.default">
+        <put-attribute name="title" value="404"/>
+        <put-attribute name="header" value="/WEB-INF/jsp/layout/blank.jsp"/>
+        <put-attribute name="search" value="/WEB-INF/jsp/layout/blank.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/layout/content-404.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/jsp/layout/blank.jsp"/>
+    </definition>
+
+
+    <definition name="app.admin.default" template="/WEB-INF/jsp/layout/admin/default-template.jsp">
+        <put-attribute name="title" value="管理员首页"/>
+        <put-attribute name="current-menu" value="Home"/>
+        <put-attribute name="head" value="/WEB-INF/jsp/layout/admin/head-default.jsp"/>
+        <put-attribute name="header" value="/WEB-INF/jsp/layout/admin/header-default.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/layout/admin/content-default.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/layout/admin/footer-default.jsp"/>
+    </definition>
+    <definition name="app.admin.index" extends="app.admin.default">
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/content-index.jsp"/>
+    </definition>
+    <definition name="app.admin.login" extends="app.admin.default">
+        <put-attribute name="title" value="管理员登录"/>
+        <put-attribute name="header" value="/WEB-INF/jsp/admin/header-login.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/content-login.jsp"/>
+    </definition>
 </tiles-definitions>

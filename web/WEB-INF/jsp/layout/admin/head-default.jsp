@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: lin
-  Date: 2016-05-01-001
-  Time: 15:57 下午
+  Date: 2016-05-04-004
+  Time: 11:30 上午
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -20,4 +20,5 @@
 <!--[if lt IE 9]>
 <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<strong>您的浏览器版本太旧！可能不能使用本站的完整功能！请换用现代浏览器:Chrome/FireFox/Opera/Edge/IE11</strong>
 <![endif]-->

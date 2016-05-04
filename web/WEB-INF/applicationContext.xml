@@ -41,23 +41,23 @@
     <bean id="userDao" class="com.youthlin.TopFresh.dao.impl.UserDaoImpl" p:sessionFactory-ref="sessionFactory"/>
     <bean id="userService" class="com.youthlin.TopFresh.service.impl.UserServiceImpl" p:userDao-ref="userDao"/>
 
+    <bean id="adminDao" class="com.youthlin.TopFresh.dao.impl.AdminDaoImpl" p:sessionFactory-ref="sessionFactory"/>
+    <bean id="adminService" class="com.youthlin.TopFresh.service.impl.AdminServiceImpl" p:adminDao-ref="adminDao"/>
+
     <!-- 配置Hibernate的局部事务管理器，使用HibernateTransactionManager类 -->
     <!-- 该类是PlatformTransactionManager接口针对采用Hibernate的特定实现类 -->
     <!-- 配置HibernateTransactionManager需依赖注入SessionFactory -->
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate5.HibernateTransactionManager"
-          p:sessionFactory-ref="sessionFactory"/>
+    <bean id="transactionManager" p:sessionFactory-ref="sessionFactory"
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager"/>
 
     <!-- 配置事务增强处理Bean,指定事务管理器 -->
-    <tx:advice id="txAdvice"
-               transaction-manager="transactionManager">
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <!-- 用于配置详细的事务定义 -->
         <tx:attributes>
             <!-- 所有以'get'开头的方法是read-only的 -->
             <tx:method name="get*" read-only="true"/>
             <!-- 其他方法使用默认的事务设置，指定超时时长为5秒 -->
-            <tx:method name="*" isolation="DEFAULT"
-                       propagation="REQUIRED" timeout="5"/>
+            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" timeout="5"/>
         </tx:attributes>
     </tx:advice>
     <!-- AOP配置的元素 -->
@@ -65,7 +65,10 @@
         <!-- 配置一个切入点 -->
         <aop:pointcut id="myPointcut" expression="bean(userService)"/>
         <!-- 指定在myPointcut切入点应用txAdvice事务增强处理 -->
-        <aop:advisor advice-ref="txAdvice"
-                     pointcut-ref="myPointcut"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut"/>
+    </aop:config>
+    <aop:config>
+        <aop:pointcut id="myPointcutAdmin" expression="bean(adminService)"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcutAdmin"/>
     </aop:config>
 </beans>

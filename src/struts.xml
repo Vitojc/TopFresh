@@ -2,21 +2,25 @@
 <!DOCTYPE struts PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
         "http://struts.apache.org/dtds/struts-2.3.dtd">
-
 <struts>
     <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
     <constant name="struts.devMode" value="true"/>
     <!--静态路径的资源http://www.cnblogs.com/nova-/p/3763883.html-->
     <constant name="struts.action.excludePattern" value="/static/.*?"/>
 
-    <package name="default" namespace="/" extends="struts-default">
+    <package name="app" namespace="/" extends="struts-default">
         <result-types>
             <result-type name="tiles"
                          class="org.apache.struts2.views.tiles.TilesResult"/>
         </result-types>
-        <action name="*">
-            <result>/WEB-INF/jsp/{1}.jsp</result>
+
+        <!--默认action为404-->
+        <default-action-ref name="notFound"/>
+        <action name="notFound">
+            <result type="tiles">app.404</result>
         </action>
+
+
         <action name="index">
             <result name="success" type="tiles">app.index</result>
         </action>
@@ -25,6 +29,38 @@
             <!--TODO 测试添加用户-->
             <result name="success" type="tiles">app.default</result>
             <result name="error" type="tiles">app.index</result>
+        </action>
+    </package>
+
+    <package name="app.admin" namespace="/admin" extends="app">
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+        </result-types>
+
+        <interceptors>
+            <interceptor name="app.admin.interceptor.login"
+                         class="com.youthlin.TopFresh.interceptor.admin.LoginInterceptor"/>
+            <interceptor-stack name="app.admin.default-interceptor-stack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="app.admin.interceptor.login"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="app.admin.default-interceptor-stack"/>
+
+        <global-results>
+            <result name="login" type="tiles">app.admin.login</result>
+        </global-results>
+
+        <action name="login" class="com.youthlin.TopFresh.action.admin.LoginAction">
+            <result type="redirectAction" name="success">index</result>
+            <result name="login" type="tiles">app.admin.login</result>
+        </action>
+
+        <action name="index">
+            <result type="tiles">app.admin.index</result>
+        </action>
+        <action name="logout" class="com.youthlin.TopFresh.action.admin.LogoutAction">
+            <result type="redirectAction">login</result>
         </action>
     </package>
 </struts>
