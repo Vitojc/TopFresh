@@ -43,6 +43,9 @@ public class AdminAction extends ActionSupport {
     public String login() {
         System.out.println("执行登录");
         ActionContext.getContext().getSession().put("login-tip", "");
+        if (getUsername() == null || getPassword() == null) {
+            return LOGIN;
+        }
         Admin admin = new Admin(getUsername(), getPassword());
         if (getAdminService().login(admin)) {
             System.out.println("登录成功");

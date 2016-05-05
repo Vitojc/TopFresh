@@ -72,11 +72,9 @@
             <result type="tiles">app.admin.media</result>
         </action>
         <action name="me" class="adminAction" method="myInfo">
-            <interceptor-ref name="app.admin.default-interceptor-stack"/>
             <result type="tiles">app.admin.me</result>
         </action>
         <action name="changePassword" class="adminAction" method="changePassword">
-            <interceptor-ref name="app.admin.default-interceptor-stack"/>
             <result type="tiles">app.admin.me</result>
         </action>
         <action name="logout" class="adminAction" method="logout">
