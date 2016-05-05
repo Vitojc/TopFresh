@@ -39,7 +39,10 @@
 
         <interceptors>
             <interceptor name="app.admin.interceptor.login"
-                         class="com.youthlin.TopFresh.interceptor.admin.LoginInterceptor"/>
+                         class="com.youthlin.TopFresh.interceptor.admin.LoginInterceptor">
+                <param name="name">登录拦截器</param>
+                <param name="excludeMethods">login</param>
+            </interceptor>
             <interceptor-stack name="app.admin.default-interceptor-stack">
                 <interceptor-ref name="defaultStack"/>
                 <interceptor-ref name="app.admin.interceptor.login"/>
@@ -51,7 +54,7 @@
             <result name="login" type="tiles">app.admin.login</result>
         </global-results>
 
-        <action name="login" class="com.youthlin.TopFresh.action.admin.LoginAction">
+        <action name="login" class="adminAction" method="login">
             <result type="redirectAction" name="success">index</result>
             <result name="login" type="tiles">app.admin.login</result>
         </action>
@@ -59,7 +62,24 @@
         <action name="index">
             <result type="tiles">app.admin.index</result>
         </action>
-        <action name="logout" class="com.youthlin.TopFresh.action.admin.LogoutAction">
+        <action name="type">
+            <result type="tiles">app.admin.type</result>
+        </action>
+        <action name="fruit">
+            <result type="tiles">app.admin.fruit</result>
+        </action>
+        <action name="media">
+            <result type="tiles">app.admin.media</result>
+        </action>
+        <action name="me" class="adminAction" method="myInfo">
+            <interceptor-ref name="app.admin.default-interceptor-stack"/>
+            <result type="tiles">app.admin.me</result>
+        </action>
+        <action name="changePassword" class="adminAction" method="changePassword">
+            <interceptor-ref name="app.admin.default-interceptor-stack"/>
+            <result type="tiles">app.admin.me</result>
+        </action>
+        <action name="logout" class="adminAction" method="logout">
             <result type="redirectAction">login</result>
         </action>
     </package>

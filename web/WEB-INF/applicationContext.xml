@@ -38,11 +38,14 @@
         </property>
     </bean>
 
+
     <bean id="userDao" class="com.youthlin.TopFresh.dao.impl.UserDaoImpl" p:sessionFactory-ref="sessionFactory"/>
     <bean id="userService" class="com.youthlin.TopFresh.service.impl.UserServiceImpl" p:userDao-ref="userDao"/>
 
     <bean id="adminDao" class="com.youthlin.TopFresh.dao.impl.AdminDaoImpl" p:sessionFactory-ref="sessionFactory"/>
     <bean id="adminService" class="com.youthlin.TopFresh.service.impl.AdminServiceImpl" p:adminDao-ref="adminDao"/>
+
+    <bean id="adminAction" class="com.youthlin.TopFresh.action.admin.AdminAction" p:adminService-ref="adminService"/>
 
     <!-- 配置Hibernate的局部事务管理器，使用HibernateTransactionManager类 -->
     <!-- 该类是PlatformTransactionManager接口针对采用Hibernate的特定实现类 -->

@@ -8,4 +8,8 @@ import com.youthlin.TopFresh.po.Admin;
  */
 public interface AdminService {
     boolean login(Admin admin);
+
+    void logout();
+
+    boolean changePassword(String name, String oldPass, String newPass);
 }

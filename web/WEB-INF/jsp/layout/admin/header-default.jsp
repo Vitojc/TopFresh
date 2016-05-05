@@ -1,4 +1,3 @@
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%--
   Created by IntelliJ IDEA.
   User: lin
@@ -14,20 +13,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<tiles:useAttribute name="current-menu" id="menu"/>
 <%
-    String item = "Home";
     String index = pageContext.getRequest().getServletContext().getContextPath();
-    if (menu != null)
-        item = (String) menu;
-    String curHome = "";
-    switch (item) {
-        case "Home":
-            curHome = " class='active'";
-            break;
-    }
 %>
-
 <header class="header-bar">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -44,8 +32,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li<%=curHome%>><a href="<%=index%>/admin/index.action">管理首页</a></li>
-                    <li><a href="<%=index%>/admin/logout.action">退出</a></li>
+                    <li id="admin-nav-home"><a href="<%=index%>/admin/index">管理首页</a></li>
+                    <li id="admin-nav-type"><a href="<%=index%>/admin/type">类别管理</a></li>
+                    <li id="admin-nav-fruit"><a href="<%=index%>/admin/fruit">水果管理</a></li>
+                    <li id="admin-nav-media"><a href="<%=index%>/admin/media">图片管理</a></li>
+                    <li id="admin-nav-me"><a href="<%=index%>/admin/me">个人信息</a></li>
+                    <li id="admin-nav-logout"><a href="<%=index%>/admin/logout">退出</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

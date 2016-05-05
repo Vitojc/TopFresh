@@ -17,10 +17,7 @@
 </head>
 <body>
 <div class="wrap" id="wrap">
-    <tiles:useAttribute name="current-menu" id="menu" ignore="true"/>
-    <tiles:insertAttribute name="header">
-        <tiles:putAttribute name="current-menu" value="${menu}"/>
-    </tiles:insertAttribute>
+    <tiles:insertAttribute name="header"/>
     <div class="container">
         <tiles:insertAttribute name="content"/>
     </div>

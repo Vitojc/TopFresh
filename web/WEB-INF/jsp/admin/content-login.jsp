@@ -41,11 +41,11 @@
             <div class="input-group">
                 <label for="username" class="input-group-addon">账号</label>
                 <s:textfield id="username" class="form-control" required="true" autofocus="autofocus"
-                             placeholder="管理员用户名" name="admin.adminName" label="UserName"/>
+                             placeholder="管理员用户名" name="username" label="UserName"/>
             </div>
             <div class="input-group">
                 <label for="password" class="input-group-addon">密码</label>
-                <s:hidden name="admin.adminPassword" id="password"/>
+                <s:hidden name="password" id="password"/>
                 <input type="password" class="form-control"
                        placeholder="管理员密码" required id="password-plain"/>
             </div>

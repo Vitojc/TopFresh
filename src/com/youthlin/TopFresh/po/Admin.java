@@ -17,6 +17,14 @@ public class Admin {
     private String adminName;
     private String adminPassword;
 
+    public Admin() {
+    }
+
+    public Admin(String name, String pass) {
+        adminName = name;
+        adminPassword = pass;
+    }
+
     @Override
     public String toString() {
         return "Admin[id=" + adminId + ",name=" + adminName + ",password=" + adminPassword + "]";

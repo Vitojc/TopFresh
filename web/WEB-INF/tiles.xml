@@ -29,21 +29,35 @@
         <put-attribute name="sidebar" value="/WEB-INF/jsp/layout/blank.jsp"/>
     </definition>
 
-
     <definition name="app.admin.default" template="/WEB-INF/jsp/layout/admin/default-template.jsp">
         <put-attribute name="title" value="管理员首页"/>
-        <put-attribute name="current-menu" value="Home"/>
         <put-attribute name="head" value="/WEB-INF/jsp/layout/admin/head-default.jsp"/>
         <put-attribute name="header" value="/WEB-INF/jsp/layout/admin/header-default.jsp"/>
         <put-attribute name="content" value="/WEB-INF/jsp/layout/admin/content-default.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/jsp/layout/admin/footer-default.jsp"/>
     </definition>
-    <definition name="app.admin.index" extends="app.admin.default">
-        <put-attribute name="content" value="/WEB-INF/jsp/admin/content-index.jsp"/>
-    </definition>
     <definition name="app.admin.login" extends="app.admin.default">
         <put-attribute name="title" value="管理员登录"/>
         <put-attribute name="header" value="/WEB-INF/jsp/admin/header-login.jsp"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin/content-login.jsp"/>
+    </definition>
+    <definition name="app.admin.index" extends="app.admin.default">
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/content-index.jsp"/>
+    </definition>
+    <definition name="app.admin.type" extends="app.admin.default">
+        <put-attribute name="title" value="类别管理"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/content-type.jsp"/>
+    </definition>
+    <definition name="app.admin.fruit" extends="app.admin.default">
+        <put-attribute name="title" value="水果管理"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/content-fruit.jsp"/>
+    </definition>
+    <definition name="app.admin.media" extends="app.admin.default">
+        <put-attribute name="title" value="媒体管理"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/content-media.jsp"/>
+    </definition>
+    <definition name="app.admin.me" extends="app.admin.default">
+        <put-attribute name="title" value="个人信息"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/content-me.jsp"/>
     </definition>
 </tiles-definitions>
