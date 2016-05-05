@@ -24,7 +24,7 @@ jQuery(document).ready(function ($) {
 });
 </script>
 <s:form action="changePassword" theme="simple" id="admin-change-password-form" cssClass="well form-horizontal">
-    <h4>修改登录密码</h4>
+    <h4 class="col-sm-offset-1">修改登录密码</h4>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <div id="tip" class="text-danger">${pageContext.session.getAttribute("change-password-tip")}&nbsp;</div>
