@@ -32,12 +32,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="admin-nav-home"><a href="<%=index%>/admin/index">管理首页</a></li>
-                    <li id="admin-nav-type"><a href="<%=index%>/admin/type">类别管理</a></li>
-                    <li id="admin-nav-fruit"><a href="<%=index%>/admin/fruit">水果管理</a></li>
-                    <li id="admin-nav-media"><a href="<%=index%>/admin/media">图片管理</a></li>
-                    <li id="admin-nav-me"><a href="<%=index%>/admin/me">个人信息</a></li>
-                    <li id="admin-nav-logout"><a href="<%=index%>/admin/logout">退出</a></li>
+                    <li id="admin-nav-home"><a href="<%=index%>/admin/index.action">管理首页</a></li>
+                    <li id="admin-nav-type"><a href="<%=index%>/admin/type.action">类别管理</a></li>
+                    <li id="admin-nav-fruit"><a href="<%=index%>/admin/fruit.action">水果管理</a></li>
+                    <li id="admin-nav-media"><a href="<%=index%>/admin/media.action">图片管理</a></li>
+                    <li id="admin-nav-me"><a href="<%=index%>/admin/me.action">个人信息</a></li>
+                    <li id="admin-nav-logout"><a href="<%=index%>/admin/logout.action">退出</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

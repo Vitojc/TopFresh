@@ -1,8 +1,5 @@
 package com.youthlin.TopFresh.test;
 
-import com.youthlin.TopFresh.po.ImageUpload;
-import com.youthlin.TopFresh.po.Product;
-import com.youthlin.TopFresh.po.ProductType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,14 +20,14 @@ public class DBTestManager {
         Session session = sf.openSession();
         Transaction tx = session.beginTransaction();
 
-//        DBTest test;
-//        test = new DBTest();
-//        test.setName("name");
-//        Set<String> set = new HashSet<>();
-//        set.add("item1");
-//        set.add("item2");
-//        test.setSet(set);
-//        session.save(test);
+        DBTest test;
+        test = new DBTest();
+        test.setName("name");
+        Set<String> set = new HashSet<>();
+        set.add("item1");
+        set.add("item2");
+        test.setSet(set);
+        session.save(test);
 //
 //        test = session.get(DBTest.class, 2);
 //        System.out.println(test);

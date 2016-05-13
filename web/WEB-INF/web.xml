@@ -12,7 +12,10 @@
             /WEB-INF/tiles.xml
         </param-value>
     </context-param>
-
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.action</location>
+    </error-page>
     <listener>
         <listener-class>
             org.apache.struts2.tiles.StrutsTilesListener

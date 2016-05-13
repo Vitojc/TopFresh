@@ -12,3 +12,4 @@ TopFresh/领鲜/Java Web/Java EE/Struts2 + Hibrnate + Tiles + jQuery + Bootstrap
 - 2016-05-03 2.添加Spring支持，并整合了SSH
 - 2016-05-04 完成管理员的登录(使用MD5加盐加密密码)
 - 2016-05-05 完成管理员的密码修改
+- 2016-05-08 总结SSH框架整合，[点此查看](http://youthlin.com/20161237.html)。

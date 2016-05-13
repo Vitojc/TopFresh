@@ -10,16 +10,13 @@
 
     <package name="app" namespace="/" extends="struts-default">
         <result-types>
-            <result-type name="tiles"
-                         class="org.apache.struts2.views.tiles.TilesResult"/>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
         </result-types>
-
         <!--默认action为404-->
-        <default-action-ref name="notFound"/>
-        <action name="notFound">
+        <default-action-ref name="404"/>
+        <action name="404">
             <result type="tiles">app.404</result>
         </action>
-
 
         <action name="index">
             <result name="success" type="tiles">app.index</result>
@@ -31,6 +28,7 @@
             <result name="error" type="tiles">app.index</result>
         </action>
     </package>
+
 
     <package name="app.admin" namespace="/admin" extends="app">
         <result-types>
@@ -49,11 +47,15 @@
             </interceptor-stack>
         </interceptors>
         <default-interceptor-ref name="app.admin.default-interceptor-stack"/>
-
+        <!--默认action为404-->
+        <default-action-ref name="404"/>
         <global-results>
             <result name="login" type="tiles">app.admin.login</result>
         </global-results>
 
+        <action name="404">
+            <result type="tiles">app.admin.404</result>
+        </action>
         <action name="login" class="adminAction" method="login">
             <result type="redirectAction" name="success">index</result>
             <result name="login" type="tiles">app.admin.login</result>
@@ -80,5 +82,6 @@
         <action name="logout" class="adminAction" method="logout">
             <result type="redirectAction">login</result>
         </action>
+
     </package>
 </struts>
