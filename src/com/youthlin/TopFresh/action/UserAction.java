@@ -4,6 +4,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.youthlin.TopFresh.po.User;
 import com.youthlin.TopFresh.service.UserService;
 
+import java.io.InputStream;
+
 /**
  * Created by lin on 2016-05-03-003.
  * 关于用户的操作
@@ -11,6 +13,7 @@ import com.youthlin.TopFresh.service.UserService;
 public class UserAction extends ActionSupport {
     private User user;
     private UserService userService;
+    private InputStream inputStream;
 
     public String add() {
         int result = getUserService().addUser(getUser());
@@ -23,8 +26,8 @@ public class UserAction extends ActionSupport {
     }
 
     public String login() {
-        boolean loginSucc = getUserService().login(getUser().getUserName(), getUser().getUserPassword());
-        if (loginSucc) {
+        boolean loginSuccess = getUserService().login(getUser().getUserName(), getUser().getUserPassword());
+        if (loginSuccess) {
             addActionMessage("用户登录成功");
             return SUCCESS;
         }
@@ -47,5 +50,13 @@ public class UserAction extends ActionSupport {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public InputStream getInputStream() {
+        return inputStream;
+    }
+
+    public void setInputStream(InputStream inputStream) {
+        this.inputStream = inputStream;
     }
 }

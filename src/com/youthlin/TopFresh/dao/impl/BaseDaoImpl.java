@@ -63,13 +63,15 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return 0;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    protected List<T> find(String hql) {
+    public List<T> find(String hql) {
         return (List<T>) getSessionFactory().getCurrentSession().createQuery(hql).list();
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    protected List<T> find(String hql, Object... param) {
+    public List<T> find(String hql, Object... param) {
         Query query = getSessionFactory().getCurrentSession().createQuery(hql);
         for (int i = 0, len = param.length; i < len; i++) {
             query.setParameter(i, param[i]);
@@ -77,14 +79,16 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return (List<T>) query.list();
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    protected List<T> findByPage(String hql, int pageNo, int pageSize) {
+    public List<T> findByPage(String hql, int pageNo, int pageSize) {
         return getSessionFactory().getCurrentSession().createQuery(hql)
                 .setFirstResult((pageNo - 1) * pageSize).setMaxResults(pageSize).list();
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    protected List<T> findByPage(String hql, int pageNo, int pageSize, Object... param) {
+    public List<T> findByPage(String hql, int pageNo, int pageSize, Object... param) {
         Query query = getSessionFactory().getCurrentSession().createQuery(hql);
         for (int i = 0, len = param.length; i < len; i++) {
             query.setParameter(i, param[i]);

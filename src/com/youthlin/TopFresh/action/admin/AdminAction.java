@@ -5,6 +5,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.youthlin.TopFresh.po.Admin;
 import com.youthlin.TopFresh.service.AdminService;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by lin on 2016-05-04-004.
  * 管理员首页逻辑
@@ -40,7 +42,7 @@ public class AdminAction extends ActionSupport {
         this.newPassword = newPassword;
     }
 
-    public String login() {
+    public String login() throws UnsupportedEncodingException {
         System.out.println("执行登录");
         ActionContext.getContext().getSession().put("login-tip", "");
         if (getUsername() == null || getPassword() == null) {
@@ -84,6 +86,5 @@ public class AdminAction extends ActionSupport {
     public void setAdminService(AdminService adminService) {
         this.adminService = adminService;
     }
-
 
 }

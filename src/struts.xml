@@ -64,7 +64,7 @@
         <action name="index">
             <result type="tiles">app.admin.index</result>
         </action>
-        <action name="type">
+        <action name="type" class="productTypeAction" method="list">
             <result type="tiles">app.admin.type</result>
         </action>
         <action name="fruit">

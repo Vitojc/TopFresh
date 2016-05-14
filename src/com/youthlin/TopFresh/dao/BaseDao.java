@@ -22,4 +22,12 @@ public interface BaseDao<T> {
     List<T> findAll(Class<T> entityClass);
 
     long findCount(Class<T> entityClass);
+
+    List<T> find(String hql);
+
+    List<T> find(String hql, Object... param);
+
+    List<T> findByPage(String hql, int pageNo, int pageSize);
+
+    List<T> findByPage(String hql, int pageNo, int pageSize, Object... param);
 }
