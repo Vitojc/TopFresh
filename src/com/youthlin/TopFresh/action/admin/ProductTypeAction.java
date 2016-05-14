@@ -40,20 +40,26 @@ public class ProductTypeAction extends ActionSupport {
                 (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         if (request.getParameter("pageNo") == null)
             pageNo = 1;
+        if (pageNo < 1) pageNo = 1;
+        if (pageNo > lastPageNO) pageNo = lastPageNO;
         return pageNo;
     }
 
     public void setPageNo(int pageNo) {
-        System.out.println("set PageNo");
         this.pageNo = pageNo;
     }
 
     public int getPageSize() {
+        HttpServletRequest request =
+                (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        if (request.getParameter("pageSize") == null)
+            pageSize = 5;
+        if (pageSize < 1) pageSize = 1;
+        if (pageSize > service.getCount()) pageSize = (int) service.getCount();
         return pageSize;
     }
 
     public void setPageSize(int pageSize) {
-        System.out.println("set PageSize");
         this.pageSize = pageSize;
     }
 

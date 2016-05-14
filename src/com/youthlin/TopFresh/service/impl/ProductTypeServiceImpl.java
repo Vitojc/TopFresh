@@ -49,7 +49,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
         if (from > orderedList.size()) from = 0;
         int to = from + pageSize;
         if (to > orderedList.size()) to = orderedList.size();
-        System.out.println("from=" + from + " to=" + to);
+//        System.out.println("from=" + from + " to=" + to);
         if (orderedList.size() < pageSize || from < 0 || to < 0) {
             return orderedList;
         }
