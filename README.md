@@ -15,3 +15,4 @@ TopFresh/领鲜/Java Web/Java EE/Struts2 + Spring + Hibernate + Tiles + jQuery +
 - 2016-05-08 总结SSH框架整合，[点此查看](http://youthlin.com/?p=1237)。
 - 2016-05-14 添加类别查看，支持分页
 - 2016-05-14 优化分页逻辑及页码显示
+- 2016-05-15 添加日志：slf4j + logback

@@ -4,6 +4,8 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.youthlin.TopFresh.po.Admin;
 import com.youthlin.TopFresh.service.AdminService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
 
@@ -17,6 +19,7 @@ public class AdminAction extends ActionSupport {
     private String username;
     private String password;
     private String newPassword;
+    static final Logger LOG = LoggerFactory.getLogger(AdminAction.class);
 
     public String getUsername() {
         return username;
@@ -67,6 +70,11 @@ public class AdminAction extends ActionSupport {
     }
 
     public String myInfo() {
+        LOG.trace("Hello World!");
+        LOG.debug("How are you today?");
+        LOG.info("I am fine.");
+        LOG.warn("I love programming.");
+        LOG.error("I am programming.");
         ActionContext.getContext().getSession().put("change-password-tip", "");
         return SUCCESS;
     }
