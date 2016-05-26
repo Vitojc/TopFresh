@@ -21,104 +21,101 @@
     </ul>
     <div class="tab-content container">
         <div role="tabpanel" class="tab-pane active" id="type-all">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <s:if test="productTypeList.size() > 0">
-                        <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>名称</th>
-                            <th>层级</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <s:url var="first"> <s:param name="pageNo" value="1"/> </s:url>
-                        <s:url var="prev"> <s:param name="pageNo" value="pageNo-1"/> </s:url>
-                        <s:url var="next"> <s:param name="pageNo" value="pageNo+1"/> </s:url>
-                        <s:url var="last"> <s:param name="pageNo" value="lastPageNo"/> </s:url>
-                        <tr>
-                            <td></td>
-                            <td colspan="2" align="center">
-                                <nav>
-                                    <ul class="pagination">
-                                        <s:if test="pageNo eq 1">
-                                            <li class="disabled"><span aria-hidden="true">&laquo;<span class="sr-only">(上一页)</span></span>
-                                            </li>
-                                        </s:if>
-                                        <s:elseif test="pageNo > 1">
-                                            <li><a href="${prev}" title="上一页">&laquo;<span class="sr-only">(上一页)</span></a>
-                                            </li>
-                                            <li><a href="${first}">1</a></li>
-                                        </s:elseif>
-                                        <s:else>
-                                            <li class="disabled"><span aria-hidden="true">&laquo;<span class="sr-only">(上一页)</span></span>
-                                            </li>
-                                            <li><span aria-hidden="true">1</span></li>
-                                        </s:else>
-
-                                        <s:if test="pageNo >= 1">
-                                            <s:if test="pageNo-1 > 1">
-                                                <s:if test="pageNo -2 > 1">
-                                                    <li class="disabled"><span>...</span></li>
-                                                </s:if>
-                                                <li><a href="${prev}"><s:property value="pageNo-1"/></a></li>
-                                            </s:if>
-                                            <s:if test="pageNo < lastPageNo">
-                                                <li class="active">
-                                                    <span><s:property value="pageNo"/><span
-                                                            class="sr-only">(current)</span></span>
-                                                </li>
-                                                <s:if test="pageNo+1 < lastPageNo">
-                                                    <li><a href="${next}"><s:property value="pageNo+1"/></a></li>
-                                                    <s:if test="pageNo+2 < lastPageNo">
-                                                        <li class="disabled"><span>...</span></li>
-                                                    </s:if>
-                                                </s:if>
-                                            </s:if>
-                                        </s:if>
-
-                                        <s:if test="pageNo < lastPageNo">
-                                            <li><a href="${last}"><s:property value="lastPageNo"/></a></li>
-                                            <li><a href="${next}" title="下一页">&raquo;<span class="sr-only">(下一页)</span></a>
-                                            </li>
-                                        </s:if>
-                                        <s:elseif test="pageNo eq lastPageNo">
-                                            <li class="active"><span><s:property value="lastPageNo"/><span
-                                                    class="sr-only">(current)</span></span></li>
-                                            <li class="disabled"><span aria-hidden="true">&raquo;<span class="sr-only">(下一页)</span></span>
-                                            </li>
-                                        </s:elseif>
-                                        <s:else>
-                                            <li><span aria-hidden="true"><s:property value="lastPageNo"/></span></li>
-                                            <li class="disabled"><span aria-hidden="true">&raquo;<span class="sr-only">(下一页)</span></span>
-                                            </li>
-                                        </s:else>
-                                    </ul>
-                                </nav>
-                            </td>
-                            <td></td>
-                        </tr>
-                        </tfoot>
-                        <tbody>
-                        <s:set var="count" value="0"/>
-                        <s:iterator var="it" value="productTypeList">
+            <s:form theme="simple" id="type-delete-form">
+                <div class="table-responsive">
+                    <script>
+                        function selectAll() {
+                            var flag = true;
+                            var selectAll = $('#select-all-flag');
+                            if (selectAll.val() == 0) {
+                                flag = true;
+                                selectAll.val(1);
+                            }
+                            else {
+                                flag = false;
+                                selectAll.val(0);
+                            }
+                            //console.log(flag + " ");
+                            $('.select-all').prop('checked', flag);
+                            $('input[name="check-list"]').prop('checked', flag);
+                            //firefox中 checkbox属性checked="checked"已有，但复选框却不显示打钩的原因
+                            //http://blog.sina.com.cn/s/blog_6657f20e0101g793.html
+                            //attr换成prop
+                        }
+                    </script>
+                    <table class="table table-striped table-hover">
+                        <style>.checkbox-label {
+                            display: flex;
+                        }</style>
+                        <s:if test="productTypeList.size() > 0">
+                            <thead>
+                            <tr>
+                                <td>操作：</td>
+                                <td>删除</td>
+                                <td colspan="2"></td>
+                            </tr>
                             <tr>
                                 <td>
-                                    <span data-id='<s:property value="typeId"/>'><s:set var="count" value="#count+1"/>${count} </span>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="select-all" onchange="selectAll()">
+                                        <span class="sr-only">全选</span>
+                                    </label>
+                                    <input type="hidden" id="select-all-flag" value="0">
                                 </td>
-                                <td><s:property value="typeName"/></td>
-                                <td><s:property value="typeLevel"/></td>
+                                <th>序号</th>
+                                <th>名称</th>
+                                <th>层级</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <s:url var="first"> <s:param name="pageNo" value="1"/> </s:url>
+                            <s:url var="prev"> <s:param name="pageNo" value="pageNo-1"/> </s:url>
+                            <s:url var="next"> <s:param name="pageNo" value="pageNo+1"/> </s:url>
+                            <s:url var="last"> <s:param name="pageNo" value="lastPageNo"/> </s:url>
+                            <tr>
+                                <td>操作：</td>
+                                <td>删除</td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="2" align="center">
+                                    <nav>
+                                        <ul class="pagination">
+                                            <s:property escapeHtml="false" value="pagination"/>
+                                        </ul>
+                                    </nav>
+                                </td>
                                 <td></td>
                             </tr>
-                        </s:iterator>
-                        </tbody>
-                    </s:if>
-                    <s:else>
-                        请先添加类别
-                    </s:else>
-                </table>
-            </div>
+                            </tfoot>
+                            <tbody>
+                            <s:set var="count" value="0"/>
+                            <s:iterator var="it" value="productTypeList">
+                                <tr>
+                                    <td>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" name="check-list" id="check-list"
+                                                   data-id='<s:property value="typeId"/>'>
+                                            <span class="sr-only">勾选/取消勾选</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <span data-id='<s:property value="typeId"/>'><s:set var="count"
+                                                                                            value="#count+1"/>${count} </span>
+                                    </td>
+                                    <td><s:property value="typeName"/></td>
+                                    <td><s:property value="typeLevel"/></td>
+                                </tr>
+                            </s:iterator>
+                            </tbody>
+                        </s:if>
+                        <s:else>
+                            请先添加类别
+                        </s:else>
+                    </table>
+                </div>
+            </s:form>
         </div>
         <div role="tabpanel" class="tab-pane" id="type-add">
             添加

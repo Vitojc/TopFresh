@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.youthlin.TopFresh.po.ProductType;
 import com.youthlin.TopFresh.service.ProductTypeService;
+import com.youthlin.TopFresh.utils.JSPUtils;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ public class ProductTypeAction extends ActionSupport {
     private int pageNo = 1;
     private int pageSize = 5;
     private int lastPageNO;
+    private String pagination;
 
     public String list() {
         setProductTypeList(service.getOrderedAllByPage(getPageNo(), getPageSize()));
@@ -30,6 +32,14 @@ public class ProductTypeAction extends ActionSupport {
         long pageCount = (count + pageSize - 1) / pageSize;
         lastPageNO = pageCount == 0 ? 1 : (int) pageCount;
         return lastPageNO;
+    }
+
+    public String getPagination() {
+        String normal = "<li><a href=\"?pageNo={0}\">{1}</a></li>";
+        String currentOrDisabled = "<li{0}><span>{1}</span></li>";
+        pagination = JSPUtils.pagination(getPageNo(), getLastPageNo(),
+                normal, currentOrDisabled, "&laquo;", "&raquo;");
+        return pagination;
     }
 
     //region getter and setter
