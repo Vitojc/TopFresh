@@ -1,8 +1,6 @@
 package com.youthlin.TopFresh.test;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.Set;
 
 /**
  * Created by lin on 2016-05-01-001.
@@ -26,19 +24,19 @@ public class DBTest {
     public void setName(String name) {
         this.name = name;
     }
+//
+//    public Set<String> getSet() {
+//        return setTest;
+//    }
+//
+//    public void setSet(Set<String> set) {
+//        this.setTest = set;
+//    }
+//
+//    @ElementCollection
+//    private Set<String> setTest;
 
-    public Set<String> getSet() {
-        return setTest;
-    }
-
-    public void setSet(Set<String> set) {
-        this.setTest = set;
-    }
-
-    @ElementCollection
-    private Set<String> setTest;
-
-    public String toString() {
-        return "[id=" + id + ",name=" + name + "," + setTest + "]";
-    }
+//    public String toString() {
+//        return "[id=" + id + ",name=" + name + "," + setTest + "]";
+//    }
 }

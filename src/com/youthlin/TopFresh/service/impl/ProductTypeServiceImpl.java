@@ -3,8 +3,11 @@ package com.youthlin.TopFresh.service.impl;
 import com.youthlin.TopFresh.dao.ProductTypeDAO;
 import com.youthlin.TopFresh.po.ProductType;
 import com.youthlin.TopFresh.service.ProductTypeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,6 +19,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     private static boolean hasModified = true;
     private static List<ProductType> orderedList;
     private static Long count;
+    private static final Logger LOG = LoggerFactory.getLogger(ProductTypeServiceImpl.class);
 
     public ProductTypeDAO getProductTypeDAO() {
         return productTypeDAO;
@@ -36,6 +40,23 @@ public class ProductTypeServiceImpl implements ProductTypeService {
             count = productTypeDAO.findCount(ProductType.class);
         hasModified = false;
         return count;
+    }
+
+    @Override
+    public List<ProductType> beforeDelete(int[] ids) {
+        List<ProductType> list = new ArrayList<>();
+        for (int id : ids) {
+            list.addAll(productTypeDAO.willDelete(ProductType.class, id));
+        }
+        return list;
+    }
+
+    @Override
+    public void delete(int[] ids) {
+        LOG.debug("删除列表项:" + Arrays.toString(ids));
+        for (int item : ids) {
+            productTypeDAO.delete(ProductType.class, item);
+        }
     }
 
     @Override
@@ -67,7 +88,6 @@ public class ProductTypeServiceImpl implements ProductTypeService {
         return orderedList;
     }
 
-
     private List<ProductType> getOrderedTypeByParent(ProductType parent) {
         return productTypeDAO.find("from " + ProductType.class.getSimpleName() +
                 " as type where type.typeParent = " + parent.getTypeId() + " order by type.typeOrderInLevel");
@@ -82,4 +102,5 @@ public class ProductTypeServiceImpl implements ProductTypeService {
             }
         }
     }
+
 }

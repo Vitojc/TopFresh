@@ -13,5 +13,9 @@ public interface ProductTypeService {
 
     long getCount();
 
+    List<ProductType> beforeDelete(int[] ids);
+
+    void delete(int[] ids);
+
     List<ProductType> getOrderedAllByPage(int pageNo, int pageSize);
 }

@@ -18,23 +18,19 @@ public class DBTestManager {
         Session session = sf.openSession();
         Transaction tx = session.beginTransaction();
 
-        ProductType type = new ProductType();
-        type.setTypeName("type2");
-        type.setTypeLevel(1);
-        type.setTypeOrderInLevel(1);
-        session.save(type);
+        ProductType type = session.get(ProductType.class, 2);
 
         ProductType sub = new ProductType();
-        sub.setTypeName("type2.1");
-        sub.setTypeLevel(2);
+        sub.setTypeName("type1.1.1");
+        sub.setTypeLevel(3);
         sub.setTypeOrderInLevel(1);
         type.addChild(sub);
 
-        sub = new ProductType();
-        sub.setTypeName("type2.2");
-        sub.setTypeLevel(2);
-        sub.setTypeOrderInLevel(2);
-        type.addChild(sub);
+//        sub = new ProductType();
+//        sub.setTypeName("type1.2");
+//        sub.setTypeLevel(2);
+//        sub.setTypeOrderInLevel(2);
+//        type.addChild(sub);
 
         tx.commit();
         session.close();

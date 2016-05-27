@@ -6,6 +6,8 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by lin on 2016-05-02-002.
@@ -23,6 +25,9 @@ public class ProductType {
     private Integer typeLevel;
     private Integer typeOrderInLevel;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<Product> typeProductSet = new TreeSet<>();
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "typeParentId")
     private ProductType typeParent;
@@ -34,7 +39,6 @@ public class ProductType {
 
     public ProductType() {
         typeChild = new ArrayList<>();
-        typeChild = new ArrayList<>();
     }
 
     public void addChild(ProductType subType) {
@@ -44,7 +48,20 @@ public class ProductType {
 
     @Override
     public String toString() {
-        return "[ProductType: id=" + typeId + ", name=" + typeName + ",level=" + typeLevel + ",order=" + typeOrderInLevel + "]";
+        return "[ProductType: id=" + typeId + ", name=" + typeName + ",level=" + typeLevel + ",order=" + typeOrderInLevel + ",productSet=" + typeProductSet + "]";
+    }
+
+    public String toJSONString() {
+        return "{\"id\":" + typeId + ",\"name\":\"" + typeName + "\",\"level\":" + typeLevel + ",\"order\":" + typeOrderInLevel + "}";
+    }
+
+    public Set<Product> getTypeProductSet() {
+        //System.out.println("获取" + typeName + "类别下商品集合");
+        return typeProductSet;
+    }
+
+    public void setTypeProductSet(Set<Product> typeProductSet) {
+        this.typeProductSet = typeProductSet;
     }
 
     public Integer getTypeId() {

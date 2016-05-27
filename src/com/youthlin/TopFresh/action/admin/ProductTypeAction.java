@@ -8,6 +8,9 @@ import com.youthlin.TopFresh.utils.JSPUtils;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -20,7 +23,48 @@ public class ProductTypeAction extends ActionSupport {
     private int pageNo = 1;
     private int pageSize = 5;
     private int lastPageNO;
-    private String pagination;
+    private String checkList;
+
+    //TODO 确认删除
+    //Struts2返回JSON对象的方法总结
+    //http://kingxss.iteye.com/blog/1622455
+    public String confirmDelete() throws IOException {
+        List<ProductType> list = service.beforeDelete(checkList2ints());
+        System.out.println("确认删除列表：" + list);
+        StringBuilder sb = new StringBuilder("[");
+        for (ProductType item : list) {
+            sb.append(item.toJSONString());
+        }
+        sb.append("]");
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("application/json;charset=utf-8");
+//        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println(sb.toString());
+        out.flush();
+        out.close();
+        return SUCCESS;
+    }
+
+    private int[] checkList2ints() {
+        String[] list = getCheckList().split(",");
+        int[] ids = new int[list.length];
+        for (int i = 0; i < list.length; i++) {
+            ids[i] = Integer.parseInt(list[i].trim());
+        }
+        return ids;
+    }
+
+    public String delete() {
+        try {
+            int[] ids = checkList2ints();
+            service.delete(ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOG.warn(e.getMessage());
+        }
+        return SUCCESS;
+    }
 
     public String list() {
         setProductTypeList(service.getOrderedAllByPage(getPageNo(), getPageSize()));
@@ -37,9 +81,8 @@ public class ProductTypeAction extends ActionSupport {
     public String getPagination() {
         String normal = "<li><a href=\"?pageNo={0}\">{1}</a></li>";
         String currentOrDisabled = "<li{0}><span>{1}</span></li>";
-        pagination = JSPUtils.pagination(getPageNo(), getLastPageNo(),
+        return JSPUtils.pagination(getPageNo(), getLastPageNo(),
                 normal, currentOrDisabled, "&laquo;", "&raquo;");
-        return pagination;
     }
 
     //region getter and setter
@@ -82,12 +125,20 @@ public class ProductTypeAction extends ActionSupport {
     }
 
     public ProductTypeService getService() {
-
         return service;
     }
 
     public void setService(ProductTypeService service) {
         this.service = service;
     }
+
+    public String getCheckList() {
+        return checkList;
+    }
+
+    public void setCheckList(String checkList) {
+        this.checkList = checkList;
+    }
+
     //endregion
 }
