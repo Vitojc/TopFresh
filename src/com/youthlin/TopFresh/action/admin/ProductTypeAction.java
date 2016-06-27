@@ -4,7 +4,6 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.youthlin.TopFresh.po.ProductType;
 import com.youthlin.TopFresh.service.ProductTypeService;
-import com.youthlin.TopFresh.utils.JSPUtils;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,10 +78,27 @@ public class ProductTypeAction extends ActionSupport {
     }
 
     public String getPagination() {
-        String normal = "<li><a href=\"?pageNo={0}\">{1}</a></li>";
-        String currentOrDisabled = "<li{0}><span>{1}</span></li>";
-        return JSPUtils.pagination(getPageNo(), getLastPageNo(),
-                normal, currentOrDisabled, "&laquo;", "&raquo;");
+        String js = "<script>$(document).ready(function(){" +
+                "  $('#pagination-select').change(function(){" +
+                "    var no=$(this).children('option:selected').val();" +
+                "    window.location.href='?pageNo='+no;" +
+                "  });});</script>";
+        StringBuilder sb = new StringBuilder(js);
+        if (getPageNo() == 1) {
+            //第一页
+            sb.append("<span class='form-control current' disabled>上一页</span>");
+        } else sb.append("<a class='form-control' href='?pageNo=").append(getPageNo() - 1).append("'>上一页</a>");
+        sb.append("<select id='pagination-select' class='form-control'>");
+        for (int i = 1; i <= getLastPageNo(); i++) {
+            if (i == getPageNo()) {
+                sb.append("<option selected>").append(i).append("</option>");
+            } else sb.append("<option value='").append(i).append("'>").append(i).append("</option>");
+        }
+        sb.append("</select>");
+        if (getPageNo() == getLastPageNo()) {
+            sb.append("<span class='form-control current' disabled>下一页</a>");
+        } else sb.append("<a class='form-control' href='?pageNo=").append(getPageNo() + 1).append("'>下一页</a>");
+        return sb.toString();
     }
 
     //region getter and setter

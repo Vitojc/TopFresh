@@ -145,10 +145,8 @@
                             请先添加类别
                         </s:else>
                     </table>
-                    <nav>
-                        <ul class="pagination">
-                            <s:property escapeHtml="false" value="pagination"/>
-                        </ul>
+                    <nav class="pagination form-inline" style="display: block;width: 192px;margin: 0 auto;">
+                        <s:property escapeHtml="false" value="pagination"/>
                     </nav>
                 </div>
             </s:form>
