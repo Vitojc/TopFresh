@@ -24,16 +24,18 @@ public class ProductTypeAction extends ActionSupport {
     private int lastPageNO;
     private String checkList;
 
-    //TODO 确认删除
+    private List<ProductType> deleteList;
     //Struts2返回JSON对象的方法总结
     //http://kingxss.iteye.com/blog/1622455
     public String confirmDelete() throws IOException {
-        List<ProductType> list = service.beforeDelete(checkList2ints());
-        System.out.println("确认删除列表：" + list);
+        deleteList = service.beforeDelete(checkList2ints());
+        System.out.println("确认删除列表：" + deleteList);
         StringBuilder sb = new StringBuilder("[");
-        for (ProductType item : list) {
-            sb.append(item.toJSONString());
+        for (ProductType item : deleteList) {
+            if (item != null)
+                sb.append(item.toJSONString()).append(",");
         }
+        if (deleteList.size() > 0) sb.deleteCharAt(sb.length() - 1);//删掉最后一个逗号
         sb.append("]");
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/json;charset=utf-8");
@@ -56,8 +58,7 @@ public class ProductTypeAction extends ActionSupport {
 
     public String delete() {
         try {
-            int[] ids = checkList2ints();
-            service.delete(ids);
+            service.delete(deleteList);
         } catch (Exception e) {
             e.printStackTrace();
             LOG.warn(e.getMessage());
@@ -71,6 +72,7 @@ public class ProductTypeAction extends ActionSupport {
     }
 
     public int getLastPageNo() {
+        if (pageSize == 0) return 1;
         long count = service.getCount();
         long pageCount = (count + pageSize - 1) / pageSize;
         lastPageNO = pageCount == 0 ? 1 : (int) pageCount;

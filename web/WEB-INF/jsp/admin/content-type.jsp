@@ -21,45 +21,63 @@
     </ul>
     <div class="tab-content container">
         <div role="tabpanel" class="tab-pane active" id="type-all">
-            <s:form theme="simple" id="type-delete-form" action="confirm">
-                <script>
-                    function selectAll() {//全选/全不选
-                        var flag = true;
-                        var selectAll = $('#select-all-flag');
-                        if (selectAll.val() == 0) {
-                            flag = true;
-                            selectAll.val(1);
-                        }
-                        else {
-                            flag = false;
-                            selectAll.val(0);
-                        }
-                        //console.log(flag + " ");
-                        $('.select-all').prop('checked', flag);
-                        $('input[name="checkList"]').prop('checked', flag);
-                        //firefox中 checkbox属性checked="checked"已有，但复选框却不显示打钩的原因
-                        //http://blog.sina.com.cn/s/blog_6657f20e0101g793.html
-                        //attr换成prop
-                        listCheck();
+            <script>
+                function selectAll() {//全选/全不选
+                    var flag = true;
+                    var selectAll = $('#select-all-flag');
+                    if (selectAll.val() == 0) {
+                        flag = true;
+                        selectAll.val(1);
                     }
-                    function listCheck() {//检查是否有选中的
-                        var checklist = $('input[name="checkList"]');
-                        $('.delete-button').attr("disabled", !checklist.is(":checked"));
+                    else {
+                        flag = false;
+                        selectAll.val(0);
                     }
-                    jQuery(document).ready(function ($) {
-                        $('#delete-confirm').on('show.bs.modal', function (e) {
-                            var form = $('#type-delete-form');
-                            $.ajax({
-                                url: form.attr('action'),
-                                dataType: 'json',
-                                data: form.serialize(),
-                                success: function (r) {
-                                    console.log(r);
+                    //console.log(flag + " ");
+                    $('.select-all').prop('checked', flag);
+                    $('input[name="checkList"]').prop('checked', flag);
+                    //firefox中 checkbox属性checked="checked"已有，但复选框却不显示打钩的原因
+                    //http://blog.sina.com.cn/s/blog_6657f20e0101g793.html
+                    //attr换成prop
+                    listCheck();
+                }
+                function listCheck() {//检查是否有选中的
+                    var checklist = $('input[name="checkList"]');
+                    $('.delete-button').attr("disabled", !checklist.is(":checked"));
+                }
+                jQuery(document).ready(function ($) {
+                    var deleteButton = $('#delete-button');
+                    $('#delete-confirm').on('show.bs.modal', function (e) {
+                        var form = $('#type-delete-form');
+                        var loading = $('#loading');
+                        console.log('begin');
+                        $.ajax({
+                            url: form.attr('action'),
+                            dataType: 'json',
+                            data: form.serialize(),
+                            success: function (data) {
+                                loading.html('<strong>将会删除以下项目：</strong>');
+                                var h = '<thead><th>名称</th><th>层级</th></thead><tbody>';
+                                for (var row in data) {
+                                    //console.log(data[row].name);
+                                    h += '<tr><td>' + data[row].name + '<td>' + data[row].level + '</td></tr>';
                                 }
-                            });
-                        })
+                                h += '</tbody>';
+                                $('#delete-table').html(h);
+                                deleteButton.attr('disabled', false);
+                            },
+                            error: function () {
+                                loading.html('出错了,请重试');
+                            },
+                            complete: function () {
+                                //console.log('complete')
+                            }
+                        });
                     });
-                </script>
+
+                });
+            </script>
+            <s:form theme="simple" id="type-delete-form" action="confirm">
                 <style scoped>.checkbox-label {
                     display: flex;
                 }</style>
@@ -128,7 +146,6 @@
                                             <input type="checkbox" disabled readonly/>
                                             <span class="sr-only">不能删除该类别</span></label>
                                         </s:else>
-
                                     </td>
                                     <td>
                                         <span data-id='<s:property value="typeId"/>'>
@@ -170,7 +187,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-default">确定删除</button>
+                            <s:form action="deleteType" theme="simple" cssStyle="display: inline-block;">
+                                <button type="submit" class="btn btn-default" id="delete-button" disabled>确定删除</button>
+                            </s:form>
                         </div>
                     </div>
                 </div>
@@ -178,7 +197,12 @@
 
         </div>
         <div role="tabpanel" class="tab-pane" id="type-add">
-            添加
+            <s:form theme="simple">
+                <h2>添加类别</h2>
+                <%--TODO 表格--%>
+                <div class="input-group">
+                </div>
+            </s:form>
         </div>
     </div>
 </div>

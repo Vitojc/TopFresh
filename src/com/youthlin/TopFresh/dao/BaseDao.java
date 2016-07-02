@@ -30,4 +30,6 @@ public interface BaseDao<T> {
     List<T> findByPage(String hql, int pageNo, int pageSize);
 
     List<T> findByPage(String hql, int pageNo, int pageSize, Object... param);
+
+    void clear();
 }

@@ -17,5 +17,7 @@ public interface ProductTypeService {
 
     void delete(int[] ids);
 
+    void delete(List<ProductType> deleteList);
+
     List<ProductType> getOrderedAllByPage(int pageNo, int pageSize);
 }

@@ -95,4 +95,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         }
         return query.setFirstResult((pageNo - 1) * pageSize).setMaxResults(pageSize).list();
     }
+
+    @Override
+    public void clear() {
+        getSessionFactory().getCurrentSession().clear();
+    }
 }

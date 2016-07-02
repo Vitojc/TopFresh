@@ -17,22 +17,32 @@ public class ProductTypeDAOImpl extends BaseDaoImpl<ProductType> implements Prod
     @Override
     public void delete(Class<ProductType> entityClazz, Serializable id) {
         Session session = getSessionFactory().getCurrentSession();
-        List list = session.createQuery("from " + entityClazz.getSimpleName()
-                + " en where en.typeParent.id = ?1").setParameter("1", id).list();
-        System.out.println("将要删除:" + list);
-//        session.createQuery("delete " + entityClazz.getSimpleName() + " en where en.id = ?1").setParameter("1", id).executeUpdate();
+//        List list = session.createQuery("from " + entityClazz.getSimpleName()
+//                + " en where en.typeParent.id = ?1").setParameter("1", id).list();
+//        System.out.println("将要删除:" + list);
+        session.createQuery("delete " + entityClazz.getSimpleName() + " en where en.id = ?1")
+                .setParameter("1", id).executeUpdate();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<ProductType> willDelete(Class<ProductType> entityClazz, Serializable id) {
         Session session = getSessionFactory().getCurrentSession();
-        List list = session.createQuery("from " + entityClazz.getSimpleName()
+        List<ProductType> list = session.createQuery("from " + entityClazz.getSimpleName()
                 + " en where en.typeParent.id = ?1").setParameter("1", id).list();
 //        System.out.println("将要删除:" + list);
         List<ProductType> toDelete = new ArrayList<>();
-        toDelete.add(get(entityClazz, id));
-        toDelete.addAll(list);
+        boolean flag = true;//标志选定的元素是否需要删除
+        for (ProductType t : list) {
+            if (t.getTypeProductSet().size() == 0) {
+                toDelete.add(t);
+            } else {
+                //有子类别 包含的商品个数不为零
+                flag = false;
+            }
+        }
+        if (flag)
+            toDelete.add(get(entityClazz, id));
         return toDelete;
     }
 }

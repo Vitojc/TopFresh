@@ -1,5 +1,5 @@
 # TopFresh
-TopFresh/领鲜/Java Web/Java EE/Struts2 + Spring + Hibernate + Tiles + jQuery + Bootstrap
+TopFresh/顶鲜/Java Web/Java EE/Struts2 + Spring + Hibernate + Tiles + jQuery + Bootstrap
 
 ### 项目进展
 - 2016-04月初 初步设想
@@ -18,3 +18,6 @@ TopFresh/领鲜/Java Web/Java EE/Struts2 + Spring + Hibernate + Tiles + jQuery +
 - 2016-05-15 添加日志：slf4j + logback
 - 2016-05-26 改进分页
 - 2016-05-27 分类的删除(未完成
+- 2016-06-27 更换分页方式
+- 2016-07-02 分类的删除
+ 

@@ -60,6 +60,15 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     }
 
     @Override
+    public void delete(List<ProductType> deleteList) {
+        LOG.debug("删除列表：" + deleteList);
+        for (ProductType t : deleteList) {
+            productTypeDAO.delete(t);
+        }
+        productTypeDAO.clear();
+    }
+
+    @Override
     public List<ProductType> getOrderedAllByPage(int pageNo, int pageSize) {
         if (orderedList == null || hasModified) getOrderedAll();
 
